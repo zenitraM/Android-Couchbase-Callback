@@ -59,3 +59,11 @@ A few assumptions are currently made to reduce the number of options that must b
 
 -  Change the name and package of your application
 -  Provide your own custom splash screen
+
+## License
+
+Portions under Apache, Erlang, and other licenses.
+
+The overall package is released under the Apache license, 2.0.
+
+Copyright 2011, Couchbase, Inc.
