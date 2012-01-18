@@ -4,6 +4,8 @@ This application provides the fastest way to deploy a <a href="http://couchapp.o
 
 ## Getting Started
 
+This project requires the latest version of the Android SDK. If you already have the SDK tools, you can upgrade by running `android update sdk`, if you don't have them, you can [install via this link](http://developer.android.com/sdk/installing.html)
+
 1.  Clone this repository
 2.  Create a local.properties pointing to your Android SDK
 
@@ -59,6 +61,11 @@ A few assumptions are currently made to reduce the number of options that must b
 
 -  Change the name and package of your application
 -  Provide your own custom splash screen
+
+## TODO
+
+* couchapp.html should list installed couchapps (and remind you to finish following the directions)
+* spoof a call to `onPageFinished` so that phonegap paints the screen even if a long ajax call happens before onload.
 
 ## License
 

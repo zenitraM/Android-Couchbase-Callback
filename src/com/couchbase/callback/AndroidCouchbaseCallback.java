@@ -147,8 +147,10 @@ public class AndroidCouchbaseCallback extends DroidGap
          */
         @Override
         public void couchbaseStarted(String host, int port) {
-            //stop the load that we started to display the splash screen
-            cancelLoadUrl();
+            if(showSplashScreen()) {
+                //stop the load that we started to display the splash screen
+                cancelLoadUrl();
+            }
             if(couchappDatabase != null) {
                 AndroidCouchbaseCallback.this.loadUrl(getCouchAppURL(host, port));
             }
