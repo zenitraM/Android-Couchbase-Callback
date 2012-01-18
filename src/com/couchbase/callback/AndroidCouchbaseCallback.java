@@ -26,6 +26,11 @@ import com.couchbase.android.CouchbaseMobile;
 import com.couchbase.android.ICouchbaseDelegate;
 import com.phonegap.DroidGap;
 
+/**
+ * Avoid making changes to this class.  If you find the need, please
+ * make suggestions here:  https://groups.google.com/forum/#!forum/mobile-couchbase
+ */
+
 public class AndroidCouchbaseCallback extends DroidGap
 {
     public static final String TAG = AndroidCouchbaseCallback.class.getName();
@@ -34,17 +39,47 @@ public class AndroidCouchbaseCallback extends DroidGap
     private ServiceConnection couchbaseService;
     private String couchappDatabase;
 
+    protected boolean showSplashScreen() {
+        return true;
+    }
+
+    protected int getSplashScreenDrawable() {
+        return R.drawable.splash;
+    }
+
+    protected String getDatabaseName() {
+        return findCouchApp();
+    }
+
+    protected String getDesignDocName() {
+        return findCouchApp();
+    }
+
+    protected String getAttachmentPath() {
+        return "/index.html";
+    }
+
+    protected String getCouchAppURL(String host, int port) {
+        return "http://" + host + ":" + port + "/" + getDatabaseName() + "/_design/" + getDesignDocName() + getAttachmentPath();
+    }
+
+    protected void couchbaseStarted(String host, int port) {
+
+    }
+
+
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
 
-        // show the splash screen
-        // NOTE: Callback won't show the splash until we try to load a URL
-        //       so we start a load, with a wait time we should never exceed
-        setIntegerProperty("splashscreen", R.drawable.splash);
-        loadUrl("file:///android_asset/www/error.html", 30000);
-
+        if(showSplashScreen()) {
+            // show the splash screen
+            // NOTE: Callback won't show the splash until we try to load a URL
+            //       so we start a load, with a wait time we should never exceed
+            setIntegerProperty("splashscreen", getSplashScreenDrawable());
+            loadUrl("file:///android_asset/www/error.html", 30000);
+        }
 
         // increase the default timeout
         super.setIntegerProperty("loadUrlTimeoutValue", 60000);
@@ -52,7 +87,7 @@ public class AndroidCouchbaseCallback extends DroidGap
         couchbaseMobile = new CouchbaseMobile(getBaseContext(), couchCallbackHandler);
         try {
             // look for a .couch file in the assets folder
-            couchappDatabase = findCouchApp();
+            couchappDatabase = getDatabaseName();
             if(couchappDatabase != null) {
                 // if we found one, install it
                 couchbaseMobile.installDatabase(couchappDatabase + COUCHBASE_DATABASE_SUFFIX);
@@ -71,10 +106,15 @@ public class AndroidCouchbaseCallback extends DroidGap
      * @return the name of the database (without the .couch extension)
      * @throws IOException
      */
-    public String findCouchApp() throws IOException {
+    public String findCouchApp() {
         String result = null;
         AssetManager assetManager = getAssets();
-        String[] assets = assetManager.list("");
+        String[] assets = null;
+        try {
+            assets = assetManager.list("");
+        } catch (IOException e) {
+            Log.e(TAG, "Error listing assets", e);
+        }
         if(assets != null) {
             for (String asset : assets) {
                 if(asset.endsWith(COUCHBASE_DATABASE_SUFFIX)) {
@@ -110,11 +150,13 @@ public class AndroidCouchbaseCallback extends DroidGap
             //stop the load that we started to display the splash screen
             cancelLoadUrl();
             if(couchappDatabase != null) {
-                AndroidCouchbaseCallback.this.loadUrl("http://" + host + ":" + port + "/" + couchappDatabase + "/_design/" + couchappDatabase + "/index.html");
+                AndroidCouchbaseCallback.this.loadUrl(getCouchAppURL(host, port));
             }
             else {
                 AndroidCouchbaseCallback.this.loadUrl("file:///android_asset/www/couchapp.html");
             }
+
+            AndroidCouchbaseCallback.this.couchbaseStarted(host, port);
         }
 
         @Override
