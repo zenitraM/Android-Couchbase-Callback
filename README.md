@@ -66,18 +66,18 @@ These instructions are divided into two sections, the first describes the develo
 Android Couchbase Callback now includes a couple of sample applications to help you get started.
 
 * PhoneGapCouchApp - this is basic PhoneGap demonstration application hosted inside a couchapp
-    # Follow the development instructions above
-    # cd examples/PhoneGapCouchApp/couchapp
-    # couchapp push http://localhost:8984/phonegapcouchapp
-    # Click refresh link on welcome page
+    1. Follow the development instructions above
+    2. cd examples/PhoneGapCouchApp/couchapp
+    3. couchapp push http://localhost:8984/phonegapcouchapp
+    4. Click refresh link on welcome page
 
 * PhotoShare - this photo sharing application shows the power of using Couchbase Mobile with Apache Callback to build real applications
-    # Follow the development instructions above
-    # cd examples/PhotoShare/couchapp
-    # couchapp push http://localhost:8984/photoshare
-    # (Optional) Refactor the ExampleAppActivity class and package name (see https://github.com/couchbaselabs/Android-Couchbase-Callback/blob/master/examples/PhotoShare/src/com/docomoinnovations/couchbase/photoshare/PhotoShare.java)
-    # (Optional) Replace the application icon with a custom icon (see https://github.com/couchbaselabs/Android-Couchbase-Callback/blob/master/examples/PhotoShare/res/drawable/icon.png)
-    # (Optional) Update the app_name string (see https://github.com/couchbaselabs/Android-Couchbase-Callback/blob/master/examples/PhotoShare/res/values/strings.xml)
+    1. Follow the development instructions above
+    2. cd examples/PhotoShare/couchapp
+    3. couchapp push http://localhost:8984/photoshare
+    4. (Optional) Refactor the ExampleAppActivity class and package name (see https://github.com/couchbaselabs/Android-Couchbase-Callback/blob/master/examples/PhotoShare/src/com/docomoinnovations/couchbase/photoshare/PhotoShare.java)
+    5. (Optional) Replace the application icon with a custom icon (see https://github.com/couchbaselabs/Android-Couchbase-Callback/blob/master/examples/PhotoShare/res/drawable/icon.png)
+    6. (Optional) Update the app_name string (see https://github.com/couchbaselabs/Android-Couchbase-Callback/blob/master/examples/PhotoShare/res/values/strings.xml)
 
 ## Assumptions
 
