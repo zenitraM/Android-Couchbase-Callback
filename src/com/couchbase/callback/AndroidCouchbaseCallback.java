@@ -35,9 +35,15 @@ public class AndroidCouchbaseCallback extends DroidGap
 {
     public static final String TAG = AndroidCouchbaseCallback.class.getName();
     public static final String COUCHBASE_DATABASE_SUFFIX = ".couch";
+    public static final String WELCOME_DATABASE = "welcome";
+    public static final String DEFAULT_ATTACHMENT = "/index.html";
     private CouchbaseMobile couchbaseMobile;
     private ServiceConnection couchbaseService;
     private String couchappDatabase;
+
+    protected boolean installWelcomeDatabase() {
+        return true;
+    }
 
     protected boolean showSplashScreen() {
         return true;
@@ -56,11 +62,15 @@ public class AndroidCouchbaseCallback extends DroidGap
     }
 
     protected String getAttachmentPath() {
-        return "/index.html";
+        return DEFAULT_ATTACHMENT;
     }
 
     protected String getCouchAppURL(String host, int port) {
         return "http://" + host + ":" + port + "/" + getDatabaseName() + "/_design/" + getDesignDocName() + getAttachmentPath();
+    }
+
+    protected String getWelcomeAppURL(String host, int port) {
+        return "http://" + host + ":" + port + "/" + WELCOME_DATABASE + "/_design/" + WELCOME_DATABASE + DEFAULT_ATTACHMENT;
     }
 
     protected void couchbaseStarted(String host, int port) {
@@ -86,6 +96,10 @@ public class AndroidCouchbaseCallback extends DroidGap
 
         couchbaseMobile = new CouchbaseMobile(getBaseContext(), couchCallbackHandler);
         try {
+            if(installWelcomeDatabase()) {
+                couchbaseMobile.installDatabase(WELCOME_DATABASE + COUCHBASE_DATABASE_SUFFIX);
+            }
+
             // look for a .couch file in the assets folder
             couchappDatabase = getDatabaseName();
             if(couchappDatabase != null) {
@@ -101,7 +115,8 @@ public class AndroidCouchbaseCallback extends DroidGap
     }
 
     /**
-     * Look for the first .couch file that can be found in the assets folder
+     * Look for the first .couch file that is not named "welcome.couch"
+     * that can be found in the assets folder
      *
      * @return the name of the database (without the .couch extension)
      * @throws IOException
@@ -117,7 +132,7 @@ public class AndroidCouchbaseCallback extends DroidGap
         }
         if(assets != null) {
             for (String asset : assets) {
-                if(asset.endsWith(COUCHBASE_DATABASE_SUFFIX)) {
+                if(!asset.startsWith(WELCOME_DATABASE) && asset.endsWith(COUCHBASE_DATABASE_SUFFIX)) {
                     result = asset.substring(0, asset.length() - COUCHBASE_DATABASE_SUFFIX.length());
                     break;
                 }
@@ -155,7 +170,7 @@ public class AndroidCouchbaseCallback extends DroidGap
                 AndroidCouchbaseCallback.this.loadUrl(getCouchAppURL(host, port));
             }
             else {
-                AndroidCouchbaseCallback.this.loadUrl("file:///android_asset/www/couchapp.html");
+                AndroidCouchbaseCallback.this.loadUrl(getWelcomeAppURL(host, port));
             }
 
             AndroidCouchbaseCallback.this.couchbaseStarted(host, port);
