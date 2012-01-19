@@ -2,9 +2,15 @@
 
 This application provides the fastest way to deploy a <a href="http://couchapp.org/">CouchApp</a> to an Android device using <a href="http://couchbase.org/">Couchbase Mobile</a> and <a href="http://incubator.apache.org/projects/callback.html">Apache Callback (formerly PhoneGap)</a>.
 
-## Getting Started
+## Requirements
 
 This project requires the latest version of the Android SDK. If you already have the SDK tools, you can upgrade by running `android update sdk`, if you don't have them, you can [install via this link](http://developer.android.com/sdk/installing.html)
+
+## Getting Started
+
+These instructions are divided into two sections, the first describes the development mode.  In this mode you can continually couchapp push your changes in for test.  The second describes distribution mode where you package your application for distribution.
+
+### Development
 
 1.  Clone this repository
 2.  Create a local.properties pointing to your Android SDK
@@ -31,19 +37,22 @@ This project requires the latest version of the Android SDK. If you already have
 
     couchapp push . http://localhost:8984/couchapp
 
-8.  Compact your database
+
+### Distribution
+
+1.  Compact your database
 
     curl -X POST -H "Content-Type: application/json"  http://localhost:8984/couchapp/_compact
 
-9.  Copy the database off the device and into this Android application's assets directory:
+2.  Copy the database off the device and into this Android application's assets directory:
 
     adb pull /mnt/sdcard/Android/data/com.couchbase.callback/db/couchapp.couch assets
 
-10.  Repackage your application with the database file included
+3.  Repackage your application with the database file included
 
     ant debug
 
-11.  Reinstall the application to launch the CouchApp
+4.  Reinstall the application to launch the CouchApp
 
     adb uninstall com.couchbase.callback
 
@@ -56,12 +65,18 @@ This project requires the latest version of the Android SDK. If you already have
 Android Couchbase Callback now includes a couple of sample applications to help you get started.
 
 * PhoneGapCouchApp - this is basic PhoneGap demonstration application hosted inside a couchapp
+    # Follow the development instructions above
+    # cd examples/PhoneGapCouchApp/couchapp
+    # couchapp push http://localhost:8984/phonegapcouchapp
+    # Click refresh link on welcome page
 
 * PhotoShare - this photo sharing application shows the power of using Couchbase Mobile with Apache Callback to build real applications
-    * Install the couchapp following the instructions above from the examples/PhotoShare/couchapp directory
-    * (Optional) Refactor the ExampleAppActivity class and package name (see https://github.com/couchbaselabs/Android-Couchbase-Callback/blob/master/examples/PhotoShare/src/com/docomoinnovations/couchbase/photoshare/PhotoShare.java)
-    * (Optional) Replace the application icon with a custom icon (see https://github.com/couchbaselabs/Android-Couchbase-Callback/blob/master/examples/PhotoShare/res/drawable/icon.png)
-    * (Optional) Update the app_name string (see https://github.com/couchbaselabs/Android-Couchbase-Callback/blob/master/examples/PhotoShare/res/values/strings.xml)
+    # Follow the development instructions above
+    # cd examples/PhotoShare/couchapp
+    # couchapp push http://localhost:8984/photoshare
+    # (Optional) Refactor the ExampleAppActivity class and package name (see https://github.com/couchbaselabs/Android-Couchbase-Callback/blob/master/examples/PhotoShare/src/com/docomoinnovations/couchbase/photoshare/PhotoShare.java)
+    # (Optional) Replace the application icon with a custom icon (see https://github.com/couchbaselabs/Android-Couchbase-Callback/blob/master/examples/PhotoShare/res/drawable/icon.png)
+    # (Optional) Update the app_name string (see https://github.com/couchbaselabs/Android-Couchbase-Callback/blob/master/examples/PhotoShare/res/values/strings.xml)
 
 ## Assumptions
 
