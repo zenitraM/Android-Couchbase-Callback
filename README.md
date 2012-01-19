@@ -37,6 +37,7 @@ These instructions are divided into two sections, the first describes the develo
 
     couchapp push . http://localhost:8984/couchapp
 
+8.  Refresh the list of CouchApps and navigate to your applicaiton
 
 ### Distribution
 
