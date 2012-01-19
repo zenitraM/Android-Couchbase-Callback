@@ -87,12 +87,16 @@ A few assumptions are currently made to reduce the number of options that must b
     
 ## Further Customizations
 
--  Change the name and package of your application
--  Provide your own custom splash screen
+*  Change the name and package of your application
+
+    Refactor name and package of ExampleAppActivity to suit your needs
+
+*  Provide your own custom splash screen
+
+    Override the getSplashScreenDrawable() method to point to your splash screen image
 
 ## TODO
 
-* couchapp.html should list installed couchapps (and remind you to finish following the directions)
 * spoof a call to `onPageFinished` so that phonegap paints the screen even if a long ajax call happens before onload.
 
 ## License
