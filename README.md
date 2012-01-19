@@ -51,6 +51,18 @@ This project requires the latest version of the Android SDK. If you already have
 
     adb shell am start -n com.couchbase.callback/.AndroidCouchbaseCallback
 
+## Examples
+
+Android Couchbase Callback now includes a couple of sample applications to help you get started.
+
+* PhoneGapCouchApp - this is basic PhoneGap demonstration application hosted inside a couchapp
+
+* PhotoShare - this photo sharing application shows the power of using Couchbase Mobile with Apache Callback to build real applications
+** Install the couchapp following the instructions above from the examples/PhotoShare/couchapp directory
+** (Optional) Refactor the ExampleAppActivity class and package name (see https://github.com/couchbaselabs/Android-Couchbase-Callback/blob/master/examples/PhotoShare/src/com/docomoinnovations/couchbase/photoshare/PhotoShare.java)
+** (Optional) Replace the application icon with a custom icon (see https://github.com/couchbaselabs/Android-Couchbase-Callback/blob/master/examples/PhotoShare/res/drawable/icon.png)
+** (Optional) Update the app_name string (see https://github.com/couchbaselabs/Android-Couchbase-Callback/blob/master/examples/PhotoShare/res/values/strings.xml)
+
 ## Assumptions
 
 A few assumptions are currently made to reduce the number of options that must be configured to get started.  Currently these can only be changed by modifying the code.
@@ -73,4 +85,4 @@ Portions under Apache, Erlang, and other licenses.
 
 The overall package is released under the Apache license, 2.0.
 
-Copyright 2011, Couchbase, Inc.
+Copyright 2011-2012, Couchbase, Inc.
