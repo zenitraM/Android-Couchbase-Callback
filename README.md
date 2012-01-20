@@ -95,6 +95,20 @@ A few assumptions are currently made to reduce the number of options that must b
 
     Override the getSplashScreenDrawable() method to point to your splash screen image
 
+## Frequently Asked Questions
+
+Q: When I start my application the splash screen shows for a long time, then I get the message "Application Error: The connection to the server was unsuccessful."  In the background behind this message I now see my application.  But when I press OK, the application exits.  What is going on?
+
+A: Most likely your application is loading a resource (something like the _chagnes feed) and this causes the PhoneGap container to fail to recognize that the page has loaded.  The fix is simple, add a function to your application that listens for the "deviceReady" event and start your work after this event fires.  For example:
+
+    document.addEventListener("deviceready", onDeviceReady, false);
+    
+    function onDeviceReady() {
+        //  start listenting to changes feed here
+    }
+
+    We are still looking for a better approach to this problem.
+
 ## TODO
 
 * spoof a call to `onPageFinished` so that phonegap paints the screen even if a long ajax call happens before onload.
