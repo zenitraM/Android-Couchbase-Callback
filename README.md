@@ -107,7 +107,7 @@ A: Most likely your application is loading a resource (something like the _chagn
         //  start listenting to changes feed here
     }
 
-    We are still looking for a better approach to this problem.
+We are still looking for a better approach to this problem.
 
 ## TODO
 
