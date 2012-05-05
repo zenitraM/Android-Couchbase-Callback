@@ -28,6 +28,8 @@
 				<category android:name="android.intent.category.LAUNCHER"/>
 			</intent-filter>
         </activity>
+	<plugin name="BarcodeScanner" value="com.phonegap.plugins.barcodescanner.BarcodeScanner"/>
+
     <service android:name="com.couchbase.android.CouchbaseService" android:enabled="true" android:exported="false"/></application>
 
 	<uses-sdk android:minSdkVersion="7"/>

@@ -1,3 +1,11 @@
+This is a fork of <a href="https://github.com/couchbaselabs/Android-Couchbase-Callback">Android-Couchbase-Callback</a> with several features and fixes added, to be used for deployment for the <a href="https://github.com/marimarps/CosmoCaixa-EEEScenario">CosmoCaixa-EEEScenario</a> project.
+
+Things changed so far from the original Couchbase-Callback:
+
+* <a href="https://github.com/phonegap/phonegap-plugins/tree/master/Android/BarcodeScanner">Barcode scanning</a> support
+
+***
+
 ## Android Couchbase Callback
 
 This application provides the fastest way to deploy a <a href="http://couchapp.org/">CouchApp</a> to an Android device using <a href="http://couchbase.org/">Couchbase Mobile</a> and <a href="http://incubator.apache.org/projects/callback.html">Apache Callback (formerly PhoneGap)</a>.
